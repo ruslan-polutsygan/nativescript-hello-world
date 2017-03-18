@@ -1,8 +1,9 @@
-import {Component, OnInit, ElementRef, ViewChild} from "@angular/core";
+import {Component, OnInit, ElementRef, ViewChild, NgZone} from "@angular/core";
 import {Grocery} from "../../shared/grocery/grocery";
 import {GroceryListService} from "../../shared/grocery/grocery-list.service";
 import {TextField} from "ui/text-field";
 import * as SocialShare from "nativescript-social-share";
+import * as dialog from 'ui/dialogs';
 
 @Component({
     selector: "lsit",
@@ -20,7 +21,7 @@ export class ListComponent implements OnInit {
     @ViewChild('groceryTextField')
     groceryTextField: ElementRef;
 
-    constructor(private groceryListService: GroceryListService) {
+    constructor(private groceryListService: GroceryListService, private zone:NgZone) {
     }
 
     ngOnInit() {
@@ -59,6 +60,31 @@ export class ListComponent implements OnInit {
                     this.grocery = "";
                 }
             )
+    }
+
+    delete(item:Grocery) {
+        dialog.confirm('Are you sure you want to delete "'+item.name+'"?')
+            .then((result:boolean) => {
+                if(!result) {
+                    return;
+                }
+                this.groceryListService.delete(item.id)
+                    .subscribe(() => {
+                            this.zone.run(() => {
+                                this.groceryList.splice(
+                                    this.groceryList.indexOf(item), 1
+                                );
+                            });
+                        },
+                        () => {
+                            alert({
+                                message: 'Could not delete "'+item.name+'"',
+                                okButtonText: "OK"
+                            });
+                        }
+                    )
+            })
+        ;
     }
 
     share() {
