@@ -3,11 +3,11 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import {Router} from "@angular/router";
 import { View } from "ui/core/view";
 import { Color } from "color";
-
+import {TextField} from "ui/text-field";
+import * as settings from "application-settings";
 import {User} from '../../shared/user/user';
 import {UserService} from '../../shared/user/user.service';
 import * as utils from '../../utils/hint-util';
-import {TextField} from "ui/text-field";
 
 @Component({
     selector: "my-app",
@@ -31,10 +31,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private router:Router, private userService:UserService, private page:Page) {
         this.user = new User();
-        this.user.email = 'user@nativescript.org';
-        this.user.password = 'password';
-        // this.user.email = 'user-ruslan@example.com';
-        // this.user.password = 'pwd';
+        this.user.email = settings.getString('user.email', 'user@nativescript.org');
+        this.user.password = settings.getString('user.password', 'password');
     }
 
     ngOnInit() {
@@ -53,6 +51,9 @@ export class LoginComponent implements OnInit {
         } else {
             this.signUp();
         }
+
+        settings.setString('user.email', this.user.email);
+        settings.setString('user.password', this.user.password);
     }
 
     private signUp() {
