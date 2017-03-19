@@ -1,5 +1,5 @@
 import { Page } from "ui/page";
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import {Component, OnInit, ElementRef, ViewChild, NgZone} from "@angular/core";
 import {Router} from "@angular/router";
 import { View } from "ui/core/view";
 import { Color } from "color";
@@ -19,6 +19,7 @@ import * as utils from '../../utils/hint-util';
 export class LoginComponent implements OnInit {
     user: User;
     isLoggingIn = true;
+    statusMessage:string = 'doing nothing';
 
     @ViewChild('container')
     container: ElementRef;
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     @ViewChild('password')
     password: ElementRef;
 
-    constructor(private router:Router, private userService:UserService, private page:Page) {
+    constructor(private router:Router, private userService:UserService, private page:Page, private zone:NgZone) {
         this.user = new User();
         this.user.email = settings.getString('user.email', 'user@nativescript.org');
         this.user.password = settings.getString('user.password', 'password');
@@ -82,7 +83,7 @@ export class LoginComponent implements OnInit {
         container.animate({
             backgroundColor: this.isLoggingIn ? new Color('white') : new Color('#301217'),
             duration: 200
-        })
+        });
     }
 
     setTextFieldColors() {
@@ -97,4 +98,56 @@ export class LoginComponent implements OnInit {
         utils.setHintColor({ view: emailTextField, color: hintColor });
         utils.setHintColor({ view: passwordTextField, color: hintColor });
     }
+
+    doSomething() {
+        this.statusMessage = 'doing something';
+        let worker = new Worker('../../worker/worker');
+        worker.postMessage( {payload: {key: 'value'} });
+        //
+        worker.onmessage = (msg) => {
+            console.log('response received');
+            console.dump(msg);
+
+            this.zone.run(() => {
+                if(msg.data.success) {
+                    this.statusMessage = 'Job is done!';
+                } else {
+                    this.statusMessage = 'Was not able to complete job'
+                }
+                worker.terminate();
+
+                console.log(this.statusMessage);
+            });
+        };
+
+        worker.onerror = (error) => {
+            console.log('Unhandled error');
+            console.dump(error);
+        };
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,4 +5,9 @@
 
     <Button [text]="isLoggingIn ? 'Sign in' : 'Sign up'" class="submit-button" (tap)="submit()"></Button>
     <Button [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>
+
+    <StackLayout class="do-something">
+        <Button text="Do something in background" (tap)="doSomething()"></Button>
+        <Label [text]="statusMessage"></Label>
+    </StackLayout>
 </StackLayout>

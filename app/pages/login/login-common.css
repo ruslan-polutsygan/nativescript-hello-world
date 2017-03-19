@@ -18,3 +18,9 @@ Button, TextField {
     color: white;
     margin-top: 20;
 }
+.do-something {
+    matring-top: 40;
+}
+.do-something Button{
+    margin-left: 0;
+}
