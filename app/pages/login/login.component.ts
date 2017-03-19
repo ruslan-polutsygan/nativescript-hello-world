@@ -8,6 +8,7 @@ import * as settings from "application-settings";
 import {User} from '../../shared/user/user';
 import {UserService} from '../../shared/user/user.service';
 import * as utils from '../../utils/hint-util';
+import * as application from 'application';
 
 @Component({
     selector: "my-app",
@@ -39,6 +40,9 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.page.actionBarHidden = true;
         this.page.backgroundImage = 'res://bg_login';
+
+        console.log(application.android.context.getFilesDir());
+        console.log(application.android.context.getCacheDir());
     }
 
     submit() {

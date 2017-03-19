@@ -9,5 +9,6 @@
     <StackLayout class="do-something">
         <Button text="Do something in background" (tap)="doSomething()"></Button>
         <Label [text]="statusMessage"></Label>
+        <Button text="Take a photo" [nsRouterLink]="['/camera']"></Button>
     </StackLayout>
 </StackLayout>
