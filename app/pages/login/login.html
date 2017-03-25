@@ -6,10 +6,7 @@
     <Button [text]="isLoggingIn ? 'Sign in' : 'Sign up'" class="submit-button" (tap)="submit()"></Button>
     <Button [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>
 
-    <StackLayout class="do-something">
-        <Button text="Do something in background" (tap)="doSomething()"></Button>
-        <Label [text]="statusMessage"></Label>
-        <Button text="Take a photo" [nsRouterLink]="['/camera']"></Button>
-        <Button text="Location" [nsRouterLink]="['/location']"></Button>
+    <StackLayout>
+        <Button text="Go to Other pages" [nsRouterLink]="['/other']"></Button>
     </StackLayout>
 </StackLayout>
