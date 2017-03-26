@@ -1,7 +1,8 @@
-<StackLayout>
-    <Button text="Do something in background" (tap)="doSomething()"></Button>
-    <Label [text]="statusMessage"></Label>
-    <Button text="Take a photo" [nsRouterLink]="['/camera']"></Button>
-    <Button text="Location" [nsRouterLink]="['/location']"></Button>
-    <Button text="Check App" [nsRouterLink]="['/check-app']"></Button>
-</StackLayout>
+<ActionBar class="other">
+    <StackLayout orientation="horizontal" horizontalAlignment="left">
+        <Button text="To List"  [nsRouterLink]="['/other/list']"></Button>
+        <Label text="Other Pages"></Label>
+    </StackLayout>
+</ActionBar>
+<router-outlet></router-outlet>
+

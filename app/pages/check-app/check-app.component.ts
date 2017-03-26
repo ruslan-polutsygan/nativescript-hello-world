@@ -4,8 +4,6 @@ import * as dialog from 'ui/dialogs';
 import * as appAvailability from 'nativescript-appavailability';
 import * as app from "application";
 
-declare const android;
-
 @Component({
     selector: "check-app",
     templateUrl: 'pages/check-app/check-app.html',

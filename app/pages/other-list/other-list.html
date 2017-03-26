@@ -1,0 +1,7 @@
+<StackLayout>
+    <Button text="Do something in background" (tap)="doSomething()"></Button>
+    <Label [text]="statusMessage"></Label>
+    <Button text="Take a photo" [nsRouterLink]="['/other/camera']"></Button>
+    <Button text="Location" [nsRouterLink]="['/other/location']"></Button>
+    <Button text="Check App" [nsRouterLink]="['/other/check-app']"></Button>
+</StackLayout>

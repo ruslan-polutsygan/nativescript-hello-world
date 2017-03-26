@@ -1,0 +1,14 @@
+ActionBar.other {
+    height: 60;
+}
+ActionBar.other Label
+{
+    height: 25;
+    vertical-align: center;
+    margin-left: 10;
+    margin-right: 5;
+}
+ActionBar.other Label,
+ActionBar.other Button {
+    margin-top: 20;
+}
