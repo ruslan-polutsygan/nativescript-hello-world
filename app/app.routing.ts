@@ -5,6 +5,7 @@ import {LocationComponent} from "./pages/location/location.component";
 import {CheckAppComponent} from "./pages/check-app/check-app.component";
 import {OtherComponent} from "./pages/other/other.component";
 import {OtherListComponent} from "./pages/other-list/other-list.component";
+import {ScannerComponent} from "./pages/scanner/scanner.component";
 
 export const routes = [
     { path: '', component: LoginComponent },
@@ -14,6 +15,7 @@ export const routes = [
         { path: 'camera', component: CameraComponent },
         { path: 'location', component: LocationComponent },
         { path: 'check-app', component: CheckAppComponent },
+        { path: 'scanner', component: ScannerComponent },
     ] },
 ];
 
@@ -25,4 +27,5 @@ export const navigatableComponents = [
     CameraComponent,
     LocationComponent,
     CheckAppComponent,
+    ScannerComponent,
 ];

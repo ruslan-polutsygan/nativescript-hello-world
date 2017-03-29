@@ -1,0 +1,4 @@
+<StackLayout sdkExampleTitle sdkToggleNavButton>
+    <Button text="Scan" (tap)="scan()" *ngIf="permissionGranted"></Button>
+    <Label [text]="status"></Label>
+</StackLayout>
